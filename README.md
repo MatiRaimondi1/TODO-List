@@ -1,21 +1,19 @@
-# Trabajo práctico - TODO List 📝
+# TODO List 📝
 
-## Grupo 7
+## Developed by
 + Raimondi Matias
 + Agatiello Santino
 
-## Descripción
-Aplicación desarrollada en TypeScript con las funcionalidades necesarias para poder trabajar con listas de tareas.
+## Description
+Application developed on TypeScript that can simulate a list of tasks.
 
-Funcionalidades:
-+ Guardar y eliminar tareas en listas.
-+ Tareas con fecha de vencimiento, prioridad, categoria y etiquetas.
-+ Tareas modificables.
-+ Busqueda de tareas.
-+ Reordenamiento de tareas.
-+ Sistema de estadisticas de progresión.
-+ Guardar y cargar tareas mediante archivos de texto plano.
+## Functions
++ Save and remove tasks.
++ Modifiable tasks.
++ Task search.
++ Task reordering.
++ Progress statistics system.
++ Saving and loading tasks using plain text files.
 
-## Documentación
-
-Dentro de la carpeta -📂docs se puede encontrar toda la documentación necesaria para operar con la aplicación, desde el diagrama de clases, diagramas de secuencia y todas las clases con sus metodos documentados en un documento HTML.
+## Documentation
+Inside --> 📂docs you can find all the documentation for the application, including: Class Diagram, Sequence Diagram and documentation for every Class in an HTML file.
