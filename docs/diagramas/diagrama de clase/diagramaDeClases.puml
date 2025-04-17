@@ -1,0 +1,158 @@
+@startuml TPTaskDiagrama
+
+title Task-App
+
+class Tarea {
+    - titulo: string
+    - descripcion: string
+    - fechaVencimiento: Date
+    - prioridad: string
+    - categoria: string
+    - etiquetas: string[]
+    - porcentaje: number
+    - estado: string
+
+    + getters()
+    + setters()
+}
+
+enum PRIORIDAD {
+    BAJA
+    MEDIA
+    ALTA 
+}
+
+enum ESTADO {
+    INCOMPLETA
+    COMPLETA
+}
+
+class NodeTarea {
+    - _value: Tarea
+    - _next: NodeTarea
+
+    + getValue(): Tarea 
+    + getNext(): NodeTarea
+    + setNext(): NodeTarea
+}
+
+class ListaTareas {
+    - head: NodeTarea
+    - ordenador: Ordenador
+
+    + push(v: Tarea): NodeTarea
+    + pop(): Tarea
+    + insertFirst(v: Tarea): NodeTarea
+    + removeFirst(): Tarea
+    + insertOrdered(v: Tarea): NodeTarea
+    + insertUnique(v: Tarea): NodeTarea
+    + delete(v: Tarea): Tarea
+    + search(v: Tarea): NodeTarea
+    + sort(): void 
+    + clear(): void
+}
+
+class MainApp {
+    - tareas: ListaTareas
+    - tareasCompletas: ListaTareas
+
+    + addTask(v: Tarea): void
+    + removeTask(v: Tarea): Tarea
+    + getTareasIncompletas(): ListaTareas
+    + getTareasCompletas(): ListaTareas
+}
+
+class EditadorDeTareas {
+    + editTitle(list: ListaTareas, task: Tarea, title: string): void
+    + editDescription(list: ListaTareas, task: Tarea, desc: string): void
+    + editExpirationDate(list: ListaTareas, task: Tarea, expDate: Date): void
+    + editPriority(list: ListaTareas, task: Tarea, priority: string): void
+    + editCategory(list: ListaTareas, task: Tarea, category: string): void
+    + addTag(list: ListaTareas, task: Tarea, tag: string): void
+    + removeTag(list: ListaTareas, task: Tarea, tag: string): void
+    + editPercentage(list: ListaTareas, task: Tarea, percentage: number): void
+}
+
+class BuscadorDeTareas {
+    + searchByTitle(list: ListaTareas, title: string): Tarea
+    + searchByExpirationDate(list: ListaTareas, expirationDate: Date): Tarea[]
+    + searchByCategory(list: ListaTareas, category: string): Tarea[]
+    + searchByTag(list: ListaTareas, tag: string): Tarea[]
+}
+
+interface Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+class OrdenarPorTitulo implements Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+class OrdenarPorFechaDeVencimiento implements Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+class OrdenarPorPrioridad implements Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+class OrdenarPorCategoria implements Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+class OrdenarPorTag implements Ordenador {
+    + sort(list: ListaTareas): void
+    + insertOrdered(list: ListaTareas, value: Tarea): void
+}
+
+interface SaveData {
+    + saveTareaIncompleta(tarea: Tarea): void
+    + saveTareaCompleta(tarea: Tarea): void
+}
+
+class SaveDataJSON implements SaveData {
+    + saveTareaIncompleta(tarea: Tarea): void
+    + saveTareaCompleta(tarea: Tarea): void
+}
+
+interface LoadData {
+    + loadTareasIncompletas(): Promise<ListaTareas>
+    + loadTareasCompletas(): Promise<ListaTareas>
+}
+
+class LoadDataJSON implements LoadData {
+    + loadTareasIncompletas(): Promise<ListaTareas>
+    + loadTareasCompletas(): Promise<ListaTareas>
+}
+
+interface ClearData {
+    + clearTareasIncompletas(): void
+    + clearTareasCompletas(): void
+}
+
+class ClearDataJSON implements ClearData {
+    + clearTareasIncompletas(): void
+    + clearTareasCompletas(): void
+}
+
+class Estadisticas {
+    + getTasaDeFinalizacion(tareasPendientes: ListaTareas, tareasCompletas: ListaTareas): number
+    + getPromedioPorcentajes(tareasPendientes: ListaTareas): number
+}
+
+Tarea --* NodeTarea
+NodeTarea --* NodeTarea
+NodeTarea --* ListaTareas
+ListaTareas -r-* MainApp
+EditadorDeTareas -r-> ListaTareas
+BuscadorDeTareas -u-> ListaTareas
+Ordenador -u-* ListaTareas
+Estadisticas -u-> ListaTareas
+
+
+@enduml

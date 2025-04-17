@@ -1,0 +1,34 @@
+@startuml Ordenar la Lista de Tareas Incompletas
+title Ordenar la Lista de Tareas Incompletas
+actor Cliente
+entity MainApp
+entity ListaTareasIncompletas
+database LoadDataJSON
+entity OrdenarPorCategoria
+Cliente -> MainApp: getListaTareasIncompletas().setHead()
+activate MainApp #Green
+MainApp -> ListaTareasIncompletas: setHead()
+activate ListaTareasIncompletas #Red
+ListaTareasIncompletas -> LoadDataJSON: loadTareasIncompletas()
+activate LoadDataJSON #blue
+LoadDataJSON -> ListaTareasIncompletas: setHead(ListaTareasIncompletas.getHead())
+deactivate LoadDataJSON
+deactivate ListaTareasIncompletas
+deactivate MainApp
+Cliente -> MainApp: getListaTareasIncompletas()
+activate MainApp #Green
+return ListaTareasIncompletas
+Cliente->ListaTareasIncompletas: ListaTareasIncompletas.setOrdenador(ORDENADOR.CATEGORIA)
+activate ListaTareasIncompletas #Red
+deactivate ListaTareasIncompletas
+Cliente->ListaTareasIncompletas: ListaTareasIncompletas.Ordenar()
+activate ListaTareasIncompletas #Red
+ListaTareasIncompletas->OrdenarPorCategoria: sort()
+activate OrdenarPorCategoria #HotPink
+return //Lista Ordenada
+deactivate OrdenarPorCategoria
+Deactivate ListaTareasIncompletas
+Cliente -> MainApp: getListaTareasIncompletas()
+activate MainApp #Green
+return ListaTareasIncompletas
+@enduml

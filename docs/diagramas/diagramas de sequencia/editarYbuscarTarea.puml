@@ -1,0 +1,50 @@
+@startuml Editar y Buscar una Tarea
+title Editar y Buscar una Tarea
+actor Cliente
+entity MainApp
+entity ListaTareasIncompletas
+database LoadDataJSON
+entity EditadorDeTareas
+entity BuscadorDeTareas
+database SaveDataJSON
+Cliente -> MainApp: getListaTareasIncompletas().setHead()
+activate MainApp #Green
+MainApp -> ListaTareasIncompletas: setHead()
+activate ListaTareasIncompletas #Red
+ListaTareasIncompletas -> LoadDataJSON: loadTareasIncompletas()
+activate LoadDataJSON #blue
+LoadDataJSON -> ListaTareasIncompletas: setHead(ListaTareasIncompletas.getHead())
+deactivate LoadDataJSON
+deactivate ListaTareasIncompletas
+deactivate MainApp
+Cliente -> MainApp: getListaTareasIncompletas()
+activate MainApp #Green
+return ListaTareasIncompletas
+Cliente -> EditadorDeTareas: editPriority(MainApp.getListaTareasIncompletas(), PasearAlPerro, PRIORIDAD.ALTA)
+note left
+Parametro 1: La Lista
+Parametro 2: Tarea a Editar
+Parametro 3: Nueva Prioridad
+end note
+activate EditadorDeTareas #HotPink
+activate ListaTareasIncompletas #Red
+EditadorDeTareas -> ListaTareasIncompletas: setValue(PRIORIDAD.ALTA)
+deactivate EditadorDeTareas
+deactivate ListaTareasIncompletas
+Cliente -> BuscadorDeTareas: searchByTitle((MainApp.getListaTareasIncompletas(), "Pasear Al Perro")
+note left
+Parametro 1: La Lista
+Parametro 2: Nombre de la Tarea
+end note
+activate BuscadorDeTareas #Orange
+BuscadorDeTareas -> ListaTareasIncompletas: //Busqueda de la Tarea
+activate ListaTareasIncompletas #Red
+return PasearAlPerro
+deactivate ListaTareasIncompletas
+BuscadorDeTareas -> Cliente: PasearAlPerro
+Cliente -> SaveDataJSON: SaveTareaIncompleta(PasearAlPerro)
+activate SaveDataJSON #Cyan
+deactivate SaveDataJSON
+
+'Cliente --> SaveDataJson: Guardar los datos
+@enduml
