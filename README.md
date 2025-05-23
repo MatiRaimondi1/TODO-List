@@ -1,19 +1,17 @@
-# TODO List 📝
+# ✅ TODO List
 
-## Developed by
-+ Raimondi Matias
-+ Agatiello Santino
+A feature-rich task management application developed in **TypeScript**.
+Original repository: [TP-Task_Grupo7](https://github.com/marketitos/TP-Task_Grupo7)
 
-## Description
-Application developed on TypeScript that can simulate a list of tasks.
+### Key Features:
+* Add, remove, modify, and reorder tasks.
+* Search functionality for tasks.
+* Progress statistics system.
+* Save and load tasks to/from plain text files.
 
-## Functions
-+ Save and remove tasks.
-+ Modifiable tasks.
-+ Task search.
-+ Task reordering.
-+ Progress statistics system.
-+ Saving and loading tasks using plain text files.
+### Developed by:
+* Raimondi Matias
+* Agatiello Santino
 
-## Documentation
-Inside --> 📂docs you can find all the documentation for the application, including: Class Diagram, Sequence Diagram and documentation for every Class in an HTML file.
+### Documentation:
+Comprehensive documentation (Class Diagram, Sequence Diagram, HTML class docs) available in the `📂docs` folder.
